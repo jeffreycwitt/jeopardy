@@ -50,7 +50,7 @@ class App extends Component {
     })
   }
   componentDidMount(){
-    Axios.get("/data/test.json").then((res) => {
+    Axios.get("data/test.json").then((res) => {
       console.log("test", res.data)
       this.setState({questions: res.data.questions})
     });
