@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/jeopardy/static/js/runtime~main.f29172a4.js"
   },
   {
-    "revision": "26d74c87397e1db26a9e",
-    "url": "/jeopardy/static/js/main.29d5526a.chunk.js"
+    "revision": "7df1a0d7efb4b67b130f",
+    "url": "/jeopardy/static/js/main.1dde6adb.chunk.js"
   },
   {
     "revision": "3e14d2223ca65cb44102",
     "url": "/jeopardy/static/js/2.da5927f4.chunk.js"
   },
   {
-    "revision": "26d74c87397e1db26a9e",
+    "revision": "7df1a0d7efb4b67b130f",
     "url": "/jeopardy/static/css/main.6bddf741.chunk.css"
   },
   {
-    "revision": "4c3d3a359deaffa5536e8e0581adb4a1",
+    "revision": "8c2159848978103b4ad7a3198f58e044",
     "url": "/jeopardy/index.html"
   }
 ];
