@@ -9,6 +9,8 @@ class App extends Component {
     super(props)
     this.handleAwardPoints = this.handleAwardPoints.bind(this)
     this.handleEditTeam = this.handleEditTeam.bind(this)
+    this.handleLoadGame = this.handleLoadGame.bind(this)
+    this.loadGame = this.loadGame.bind(this)
     this.state = {
       teams: [
         {
@@ -20,7 +22,8 @@ class App extends Component {
           "score": 0,
         }
       ],
-      questions: []
+      questions: [],
+      game: "data/test.json"
     }
   }
   handleEditTeam(team, value, data){
@@ -49,11 +52,19 @@ class App extends Component {
       }
     })
   }
-  componentDidMount(){
-    Axios.get("data/test.json").then((res) => {
-      console.log("test", res.data)
+  handleLoadGame(e){
+    e.preventDefault();
+    const game = this.refs.game.value
+    this.setState({game: game})
+    this.loadGame(game)
+  }
+  loadGame(url){
+    Axios.get(url).then((res) => {
       this.setState({questions: res.data.questions})
     });
+  }
+  componentDidMount(){
+    this.loadGame(this.state.game)
   }
   render() {
     const displayAllColumns = () => {
@@ -77,7 +88,10 @@ class App extends Component {
         }
       })
       return (
-        <div className="column">{displayArray}</div>
+        <div className="column">
+        <div>{columnid}</div>
+        {displayArray}
+        </div>
       )
     }
     const displayTeamScores = () => {
@@ -94,6 +108,7 @@ class App extends Component {
       <div>
       <div className="header">
       <span id="title">Jeopardy</span>
+      <form onSubmit={this.handleLoadGame}><input type="text" placeholder="game url" ref="game"/><button>Load Game</button></form>
       <div id="teamWrapper">
       {displayTeamScores()}
       </div>

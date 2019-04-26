@@ -7,7 +7,8 @@ class Question extends Component {
     this.handleToggleAnswer = this.handleToggleAnswer.bind(this)
     this.state = {
       selected: false,
-      answer: false
+      answer: false,
+      audio: new Audio('data/Jeopardy-theme-song.mp3')
     }
   }
   handleToggleSelected(){
@@ -26,6 +27,18 @@ class Question extends Component {
       }
     })
   }
+  componentDidUpdate(){
+    if (this.state.selected && !this.state.answer){
+      console.log("test1")
+      this.state.audio.play();
+    }
+    else{
+      console.log("test2")
+      this.state.audio.pause();
+    }
+
+
+  }
   render() {
     const awardToTeamDisplay = () => {
       const teamArray = this.props.teams.map((t) => {
@@ -42,12 +55,14 @@ class Question extends Component {
       <div className={classNames}>
       <div onClick={this.handleToggleSelected}>
         <p>{this.props.value}</p>
-        <p>{this.props.question}</p>
+
       </div>
       <div>
+        {this.state.selected && !this.state.answer && <p>{this.props.question}</p>}
         {this.state.selected && !this.state.answer && <button onClick={this.handleToggleAnswer}>Show Answer</button>}
         {this.state.answer && <p onClick={this.handleToggleAnswer}>{this.props.answer}</p>}
         {this.state.answer && awardToTeamDisplay()}
+
         </div>
         </div>
     );
