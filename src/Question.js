@@ -27,7 +27,7 @@ class Question extends Component {
     })
   }
   componentDidUpdate(){
-    if (this.state.selected && !this.state.answer){
+    if (this.state.selected && !this.state.answered){
       console.log("test1")
       this.state.audio.play();
     }
