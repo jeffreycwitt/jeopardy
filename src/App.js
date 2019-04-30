@@ -89,7 +89,7 @@ class App extends Component {
       })
       return (
         <div className="column">
-        <div>{columnid}</div>
+        <div style={{"text-align": "center"}}>{columnid}</div>
         {displayArray}
         </div>
       )
