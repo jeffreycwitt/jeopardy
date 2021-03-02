@@ -5,29 +5,40 @@ class Question extends Component {
     super(props)
     this.handleToggleSelected = this.handleToggleSelected.bind(this)
     this.handleAnswered = this.handleAnswered.bind(this)
+    this.handlePause = this.handlePause.bind(this)
     this.state = {
       selected: false,
       audio: new Audio('data/Jeopardy-theme-song.mp3'),
-      answered: false
+      answered: false,
+      paused: false
     }
+  }
+  handlePause(){
+    this.setState((prevState) => {
+      return {
+        paused: !prevState.paused
+      }
+    })
   }
   handleToggleSelected(){
     this.setState((prevState) => {
       //const previousStateSelectedValue = prevState.selected
       return {
         selected: !prevState.selected,
+        paused: true
       }
     })
   }
   handleAnswered(){
     this.setState((prevState) => {
       return {
-        answered: true
+        answered: true,
+        paused: false
       }
     })
   }
   componentDidUpdate(){
-    if (this.state.selected && !this.state.answered){
+    if ((this.state.selected && !this.state.answered) && this.state.paused){
       console.log("test1")
       this.state.audio.play();
     }
@@ -58,6 +69,7 @@ class Question extends Component {
       </div>
       <div>
         {this.state.selected && <p>{this.props.question}</p>}
+        {this.state.selected && <button onClick={this.handlePause}>Toggle Pause</button>}
         {this.state.selected && !this.state.answered && awardToTeamDisplay()}
         {this.state.selected && !this.state.answered && <button onClick={this.handleAnswered}>Show Answer</button>}
         {this.state.selected && this.state.answered  && <p onClick={this.handleAnswered}>{this.props.answer}</p>}
